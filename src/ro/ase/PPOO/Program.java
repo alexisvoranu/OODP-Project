@@ -7,8 +7,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Clasa Program gestionează operațiile de citire a datelor din fișiere și oferă metode pentru obținerea datelor referitoare la clienți, produse și comenzi */
 public class Program {
 
+    /**
+     * Metodă pentru citirea clienților dintr-un fișier text
+     * Fiecare client este validat pentru a conține toate informațiile necesare
+     *
+     * @return o listă de obiecte Client
+     * @throws RuntimeException dacă există o eroare de citire a fișierului sau datele sunt incomplete
+     */
     public static List<Client> citireClienti() {
         final int NUMAR_VIRGULE_ASTEPTAT = 4;
         List<Client> clienti = new ArrayList<>();
@@ -43,7 +52,13 @@ public class Program {
         return clienti;
     }
 
-
+    /**
+     * Metodă pentru citirea produselor dintr-un fișier text
+     * Fiecare produs este validat pentru a conține toate informațiile necesare
+     *
+     * @return o listă de obiecte Produs
+     * @throws RuntimeException dacă există o eroare de citire a fișierului sau datele sunt incomplete
+     */
     public static List<Produs> citireProduse() {
         final int NUMAR_VIRGULE_ASTEPTAT = 3;
         List<Produs> produse = new ArrayList<>();
@@ -77,9 +92,15 @@ public class Program {
         return produse;
     }
 
-
+    /**
+     * Metodă pentru citirea comenzilor dintr-un fișier text
+     * Fiecare comandă este validată pentru a conține toate informațiile necesare, inclusiv produsele și cantitățile acestora
+     *
+     * @return un set de obiecte Comanda, sortat după data plasării
+     * @throws RuntimeException dacă există o eroare de citire a fișierului sau datele sunt incomplete
+     */
     public static Set<Comanda> citireComenzi() {
-        final int NUMAR_TABS_ASTEPTAT = 6;
+        final int NUMAR_TABS_ASTEPTAT = 7;
         Set<Comanda> comenzi = new TreeSet<>(Comparator.comparing(Comanda::getDataPlasare));
 
         try (BufferedReader fisier = new BufferedReader(new FileReader(
@@ -106,8 +127,8 @@ public class Program {
                 int nrProduse = Integer.parseInt(valori[6]);
 
                 int numarTabs = linie.length() - linie.replace("\t", "").length();
-                if (numarTabs != NUMAR_TABS_ASTEPTAT + nrProduse * 2) {
-                    throw new InvalidNumberOfDataInFile("Fisierul comenzi.txt nu contine toate informațiile necesare unei comenzi!");
+                if (numarTabs != (NUMAR_TABS_ASTEPTAT + nrProduse * 2)) {
+                    throw new InvalidNumberOfDataInFile("Fisierul comenzi.txt nu contine toate informațiile necesare unei comenzi! "+numarTabs);
                 }
 
                 int[][] produse = new int[nrProduse][2];
@@ -142,6 +163,13 @@ public class Program {
         return comenzi;
     }
 
+    /**
+     * Găsește un produs după ID dintr-o listă de produse
+     *
+     * @param id      ID-ul produsului de căutat
+     * @param produse Lista de produse în care se face căutarea
+     * @return un obiect Produs dacă este găsit, altfel null
+     */
     public static Produs gasesteProdusDupaId(int id, List<Produs> produse) {
         for (Produs produs : produse) {
             if (produs.getId() == id) {

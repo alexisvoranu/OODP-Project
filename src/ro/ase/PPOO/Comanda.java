@@ -109,7 +109,6 @@ public class Comanda implements ServiciiClient{
     public Set<Comanda> vizualizeazaIstoricComenzi(int idClient, Set<Comanda> comenzi) {
         Set<Comanda> comenziClient = comenzi.stream()
                 .filter(comanda -> comanda.getIdClient() == idClient)
-                .sorted((c1, c2) -> Integer.compare(c1.getId(), c2.getId()))
                 .collect(Collectors.toSet());
         return comenziClient;
     }

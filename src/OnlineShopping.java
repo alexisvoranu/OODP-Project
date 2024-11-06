@@ -9,6 +9,10 @@ import static ro.ase.PPOO.Program.citireClienti;
 import static ro.ase.PPOO.Program.citireProduse;
 import static ro.ase.PPOO.Comanda.adaugaComandaInFisier;
 
+/**
+ * Clasa OnlineShopping implementează o interfață grafică pentru realizarea unei comenzi online.
+ * Permite selectarea unui client, a mai multor produse, specificarea cantității și aplicarea unui cod de reducere.
+ */
 public class OnlineShopping {
     private JComboBox<String> comboBoxClient;
     private JComboBox<String> comboBoxProdus;
@@ -26,6 +30,10 @@ public class OnlineShopping {
     private List<Produs> produse;
     private List<Client> clienti;
 
+    /**
+     * Constructorul clasei OnlineShopping inițializează interfața grafică și populează combobox-urile cu clienți și produse,
+     * Definește acțiunile pentru butoanele de adăugare produse, aplicare reducere și plasare comandă.
+     */
     public OnlineShopping() {
         clienti = citireClienti();
         produse = citireProduse();
@@ -166,6 +174,11 @@ public class OnlineShopping {
         frame.setVisible(true);
     }
 
+    /**
+     * Calculează valoarea totală a produselor din coș, aplicând un discount dacă este cazul.
+     *
+     * @return valoarea totală a comenzii.
+     */
     private double calculateTotal() {
         double total = 0;
         boolean esteDiscountulValid = false;
@@ -194,7 +207,11 @@ public class OnlineShopping {
         return total;
     }
 
-
+    /**
+     * Generează un număr unic pentru o comandă.
+     *
+     * @return ID-ul comenzii.
+     */
     private int generateOrderId() {
         return (int) (Math.random() * 100000);
     }

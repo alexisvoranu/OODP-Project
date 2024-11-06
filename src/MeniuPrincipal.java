@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 public class MeniuPrincipal extends JFrame {
 
+    /**
+     * Clasa MeniuPrincipal reprezintă fereastra principală a aplicației
+     * Oferă opțiuni clare oricărui utilizator
+     */
     public MeniuPrincipal() {
         setTitle("Meniu Principal");
         setSize(300, 200);
@@ -14,6 +18,7 @@ public class MeniuPrincipal extends JFrame {
         JButton openShoppingButton = new JButton("Deschide fereastra de cumpărături");
         JButton openOrdersHistory = new JButton("Vezi istoric cumpărături");
         JButton openClientStatistics = new JButton("Vezi statistici client");
+        JButton editProductsList = new JButton("Gestionează produsele");
         openShoppingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,10 +43,19 @@ public class MeniuPrincipal extends JFrame {
             }
         });
 
+        editProductsList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GestionareProduse();
+                dispose();
+            }
+        });
+
         setLayout(new FlowLayout());
         add(openShoppingButton);
         add(openOrdersHistory);
         add(openClientStatistics);
+        add(editProductsList);
     }
 
     public static void main(String[] args) {

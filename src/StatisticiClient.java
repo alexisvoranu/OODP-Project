@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 
 import static ro.ase.PPOO.Program.*;
 
+/**
+ * Clasa StatisticiClient reprezintă o interfață grafică pentru vizualizarea statisticilor comenzilor unui client selectat
+ * Include numărul total de comenzi, produsele comandate și suma totală cheltuită pentru un client selectat
+ */
+
 public class StatisticiClient {
     private JComboBox<String> comboBoxClient;
     private JTextArea textAreaStatistici;
@@ -62,6 +67,9 @@ public class StatisticiClient {
         frame.setVisible(true);
     }
 
+    /**
+     Afișează statisticile pentru clientul selectat în comboBoxClient, incluzând informațiile prezentate anterior
+     */
     private void afiseazaStatisticiClient() {
         textAreaStatistici.setText("");
 
